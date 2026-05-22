@@ -35,7 +35,7 @@ const updateSpeed = 20
 
 const baseLifespan = 365 * 70
 
-const baseGameSpeed = 4
+const baseGameSpeed = 4*16
 
 const permanentUnlocks = ["Scheduling", "Shop", "Automation", "Quick task display"]
 
@@ -691,6 +691,7 @@ function createRequiredRow(categoryName) {
     requiredRow.classList.add("requiredRow")
     requiredRow.classList.add(removeSpaces(categoryName))
     requiredRow.id = categoryName
+    requiredRow.setAttribute("data-category", categoryName)
     return requiredRow
 }
 
@@ -705,7 +706,22 @@ function createHeaderRow(templates, categoryType, categoryName) {
     headerRow.style.color = "#ffffff"
     headerRow.classList.add(removeSpaces(categoryName))
     headerRow.classList.add("headerRow")
-    
+
+    var isCollapsed = false
+    var toggle = document.createElement("span")
+    toggle.textContent = " ▼"
+    toggle.style.cssText = "cursor:pointer; float:right; user-select:none;"
+    toggle.onclick = function(e) {
+        e.stopPropagation()
+        isCollapsed = !isCollapsed
+        toggle.textContent = isCollapsed ? " ▶" : " ▼"
+        var rows = document.querySelectorAll("[data-category='" + categoryName + "']")
+        rows.forEach(function(row) {
+            isCollapsed ? row.classList.add("collapsed-row") : row.classList.remove("collapsed-row")
+        })
+    }
+    headerRow.getElementsByClassName("category")[0].appendChild(toggle)
+
     return headerRow
 }
 
@@ -714,6 +730,7 @@ function createRow(templates, name, categoryName, categoryType) {
     row.getElementsByClassName("name")[0].textContent = name
     row.getElementsByClassName("tooltipText")[0].textContent = tooltips[name]
     row.id = "row " + name
+    row.setAttribute("data-category", categoryName)
     if (categoryType != itemCategories) {
         row.getElementsByClassName("progressBar")[0].onclick = function() {setTask(name)}
     } else {

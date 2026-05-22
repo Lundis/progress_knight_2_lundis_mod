@@ -44,6 +44,10 @@ td {
     display: none !important;
 }
 
+.collapsed-row {
+    display: none !important;
+}
+
 .button {
     border: 1px solid black !important;
 }
