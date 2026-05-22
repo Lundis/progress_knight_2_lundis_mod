@@ -48,6 +48,10 @@ td {
     display: none !important;
 }
 
+#jobTable, #skillTable, #itemTable {
+    width: auto;
+}
+
 .button {
     border: 1px solid black !important;
 }

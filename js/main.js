@@ -848,13 +848,13 @@ function updateTaskRows() {
     for (key in gameData.taskData) {
         var task = gameData.taskData[key]
         var row = document.getElementById("row " + task.name)
-        row.getElementsByClassName("level")[0].textContent = task.level
-        row.getElementsByClassName("xpGain")[0].textContent = format(task.getXpGain())
-        row.getElementsByClassName("xpLeft")[0].textContent = format(task.getXpLeft())
+        var levelText = gameData.rebirthOneCount > 0 ? task.level + " / " + task.maxLevel : task.level
+        row.getElementsByClassName("level")[0].textContent = levelText
 
-        var maxLevel = row.getElementsByClassName("maxLevel")[0]
-        maxLevel.textContent = task.maxLevel
-        gameData.rebirthOneCount > 0 ? maxLevel.classList.remove("hidden") : maxLevel.classList.add("hidden")
+        var xpGain = task.getXpGain()
+        var daysLeft = xpGain > 0 ? task.getXpLeft() / xpGain : Infinity
+        var daysLeftText = !isFinite(daysLeft) ? "∞" : daysLeft < 1 ? "<1" : format(Math.ceil(daysLeft))
+        row.getElementsByClassName("daysLeft")[0].textContent = daysLeftText
 
         var progressFill = row.getElementsByClassName("progressFill")[0]
         progressFill.style.width = task.xp / task.getMaxXp() * 100 + "%"
@@ -899,8 +899,6 @@ function updateHeaderRows(categories) {
     for (categoryName in categories) {
         var className = removeSpaces(categoryName)
         var headerRow = document.getElementsByClassName(className)[0]
-        var maxLevelElement = headerRow.getElementsByClassName("maxLevel")[0]
-        gameData.rebirthOneCount > 0 ? maxLevelElement.classList.remove("hidden") : maxLevelElement.classList.add("hidden")
         var skipSkillElement = headerRow.getElementsByClassName("skipSkill")[0]
         skipSkillElement.style.display = categories == skillCategories && autoLearnElement.checked ? "block" : "none"
     }
