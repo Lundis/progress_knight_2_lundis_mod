@@ -1060,7 +1060,7 @@ function setSkillWithLowestMaxXp() {
         return
     }
 	
-	enabledSkills.sort((lhs, rhs) => { return lhs.getMaxXp() / lhs.getXpGain() - rhs.getMaxXp() / rhs.getXpGain() })
+	enabledSkills.sort((lhs, rhs) => { return lhs.getMaxXp() / lhs.getXpGain() * Math.max(lhs.level, 1)  - rhs.getMaxXp() / rhs.getXpGain() * Math.max(rhs.level, 1)})
 
     var skillName = enabledSkills[0].name
     skillWithLowestMaxXp = gameData.taskData[skillName]
@@ -1714,4 +1714,4 @@ setTab(jobTabButton, "jobs")
 update()
 setInterval(update, 1000 / updateSpeed)
 setInterval(saveGameData, 3000)
-setInterval(setSkillWithLowestMaxXp, 1000)
+setInterval(setSkillWithLowestMaxXp, 500)
