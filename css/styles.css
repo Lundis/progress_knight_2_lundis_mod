@@ -101,7 +101,7 @@ button:focus {
     position: absolute;
     z-index: 1;
     top: -5px;
-    left: 105%;
+    left: -160%;
 
     opacity: 0;
     transition: opacity 0.5s;
