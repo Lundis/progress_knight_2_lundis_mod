@@ -3,7 +3,7 @@ body {
 }
 
 .w3-bar-item {
-    width: 100px;
+    width: auto;
     height: 40px;
     text-align: center;
 }
@@ -28,7 +28,7 @@ td {
     position: relative;
     background-color: rgb(12, 101, 173);
     cursor: pointer;
-    width: 200px;
+    width: 150px;
 }
 
 .progress-fill {
@@ -50,6 +50,12 @@ td {
 
 #jobTable, #skillTable, #itemTable {
     width: auto;
+}
+
+#jobs {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
 }
 
 .button {

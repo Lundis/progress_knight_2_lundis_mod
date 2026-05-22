@@ -632,7 +632,7 @@ function setTab(element, selectedTab) {
     tabs.forEach(function(tab) {
         tab.style.display = "none"
     })
-    document.getElementById(selectedTab).style.display = "block"
+    document.getElementById(selectedTab).style.display = ""
 
     var tabButtons = document.getElementsByClassName("tabButton")
     for (tabButton of tabButtons) {
