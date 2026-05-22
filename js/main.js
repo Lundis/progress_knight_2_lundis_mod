@@ -3,7 +3,7 @@ var gameData = {
     itemData: {},
 
     coins: 0,
-    days: 365 * 14,
+    days: 365 * 1,
     evil: 0,
 	essence: 0,
     paused: false,
@@ -1240,7 +1240,7 @@ function rebirthReset() {
     setTab(jobTabButton, "jobs")
 
     gameData.coins = 0
-    gameData.days = 365 * 14
+    gameData.days = 365 * 1
     gameData.currentJob = gameData.taskData["Beggar"]
     gameData.currentSkill = gameData.taskData["Concentration"]
     gameData.currentProperty = gameData.itemData["Homeless"]
