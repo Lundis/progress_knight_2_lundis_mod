@@ -26,6 +26,7 @@ var gameData = {
 var tempData = {}
 
 var skillWithLowestMaxXp = null
+var lastManualSkillSet = 0
 
 const autoPromoteElement = document.getElementById("autoPromote")
 const autoLearnElement = document.getElementById("autoLearn")
@@ -651,7 +652,12 @@ function setTimeWarping() {
 
 function setTask(taskName) {
     var task = gameData.taskData[taskName]
-    task instanceof Job ? gameData.currentJob = task : gameData.currentSkill = task
+    if (task instanceof Job) {
+        gameData.currentJob = task
+    } else {
+        gameData.currentSkill = task
+        lastManualSkillSet = Date.now()
+    }
 }
 
 function setProperty(propertyName) {
@@ -1085,6 +1091,7 @@ function getKeyOfLowestValueFromDict(dict) {
 
 function autoLearn() {
     if (!autoLearnElement.checked || !skillWithLowestMaxXp) return
+    if (Date.now() - lastManualSkillSet < 3000) return
     gameData.currentSkill = skillWithLowestMaxXp
 }
 
