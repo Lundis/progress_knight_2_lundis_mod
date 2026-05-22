@@ -58,14 +58,18 @@ td {
     align-items: flex-start;
 }
 
-.button {
+button.button {
+    padding: 4px;
+}
+
+button  {
     border: 1px solid black !important;
 }
 
 .item-button {
     background-color: white;
     text-align: center;
-    width: 200px;
+    width: 100px;
     height: 40px;
     padding: 8px;
 }
@@ -161,6 +165,7 @@ button:focus {
 
 .income {
     max-width: 100px;
+    width: 100px;
     max-height: 16px;
     overflow: hidden;
 }
@@ -210,3 +215,6 @@ td {
     padding-bottom: 0 !important;
 }
 
+#automation {
+    font-size: small;
+}

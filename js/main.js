@@ -1491,12 +1491,12 @@ window.addEventListener('keydown', function(e) {
     let div = document.createElement('div');
     div.classList.add('inline');
     div.textContent = 'Auto-pause(Void)';
-    span.append(div);
     let checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.classList.add('inline');
     checkbox.id = 'autoPause';
     span.append(checkbox);
+    span.append(div);
     document.querySelector('span#automation').prepend(document.createElement('br'));
     document.querySelector('span#automation').prepend(span);
     increaseDays = () => {
@@ -1539,8 +1539,8 @@ gameData.requirements = {
     "Shop": new CoinRequirement([document.getElementById("shopTabButton")], [{requirement: gameData.itemData["Tent"].getExpense() * 50}]),
     "Rebirth tab": new AgeRequirement([document.getElementById("rebirthTabButton")], [{requirement: 25}]),
     "Rebirth note 1": new AgeRequirement([document.getElementById("rebirthNote1")], [{requirement: 45}]),
-    "Rebirth note 2": new AgeRequirement([document.getElementById("rebirthNote2")], [{requirement: 65}]),
-    "Rebirth note 3": new AgeRequirement([document.getElementById("rebirthNote3")], [{requirement: 200}]),
+    "Rebirth note 2": new AgeRequirement([document.getElementById("rebirthNote2"), document.getElementById("rebirthOneButton")], [{requirement: 65}]),
+    "Rebirth note 3": new AgeRequirement([document.getElementById("rebirthNote3"), document.getElementById("rebirthTwoButton")], [{requirement: 200}]),
 	"Rebirth note 4": new AgeRequirement([document.getElementById("rebirthNote4")], [{requirement: 1000}]),
 	"Rebirth note 4": new AgeRequirement([document.getElementById("rebirthNote4")], [{requirement: 1000}]),
 	"Rebirth note 5": new AgeRequirement([document.getElementById("rebirthNote5")], [{requirement: 10000}]),
