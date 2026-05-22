@@ -29,6 +29,7 @@ var skillWithLowestMaxXp = null
 
 const autoPromoteElement = document.getElementById("autoPromote")
 const autoLearnElement = document.getElementById("autoLearn")
+const autoPurchaseElement = document.getElementById("autoPurchase")
 
 const updateSpeed = 20
 
@@ -575,7 +576,7 @@ function getGameSpeed() {
 function applyExpenses() {
     var coins = applySpeed(getExpense())
     gameData.coins -= coins
-    if (gameData.coins < 0) {    
+    if (gameData.coins < 0) {
         goBankrupt()
     }
 }
@@ -591,8 +592,34 @@ function getExpense() {
 
 function goBankrupt() {
     gameData.coins = 0
-    gameData.currentProperty = gameData.itemData["Homeless"]
-    gameData.currentMisc = []
+
+    var mostExpensive = null
+    var maxExpense = 0
+
+    if (gameData.currentProperty.name !== "Homeless") {
+        var propExpense = gameData.currentProperty.getExpense()
+        if (propExpense > maxExpense) {
+            maxExpense = propExpense
+            mostExpensive = { type: "property" }
+        }
+    }
+
+    for (var misc of gameData.currentMisc) {
+        var miscExpense = misc.getExpense()
+        if (miscExpense > maxExpense) {
+            maxExpense = miscExpense
+            mostExpensive = { type: "misc", item: misc }
+        }
+    }
+
+    if (mostExpensive === null) return
+
+    if (mostExpensive.type === "property") {
+        gameData.currentProperty = gameData.itemData["Homeless"]
+    } else {
+        var idx = gameData.currentMisc.indexOf(mostExpensive.item)
+        if (idx !== -1) gameData.currentMisc.splice(idx, 1)
+    }
 }
 
 function initUI() {
@@ -1046,6 +1073,36 @@ function autoLearn() {
     gameData.currentSkill = skillWithLowestMaxXp
 }
 
+function autoPurchase() {
+    if (!autoPurchaseElement.checked) return
+
+    var income = getIncome()
+
+    // Find best (most expensive) property whose expense fits within income alongside current misc
+    var miscExpense = gameData.currentMisc.reduce(function(sum, m) { return sum + m.getExpense() }, 0)
+    var bestProperty = gameData.currentProperty
+    for (var propName of itemCategories["Properties"]) {
+        var prop = gameData.itemData[propName]
+        if (!gameData.requirements[propName].isCompleted()) continue
+        if (miscExpense + prop.getExpense() <= income) {
+            bestProperty = prop
+        }
+    }
+    if (bestProperty.getExpense() > gameData.currentProperty.getExpense()) {
+        gameData.currentProperty = bestProperty
+    }
+
+    // Buy any unlocked misc items we can still afford
+    for (var miscName of itemCategories["Misc"]) {
+        if (gameData.currentMisc.some(function(m) { return m.name === miscName })) continue
+        var misc = gameData.itemData[miscName]
+        if (!gameData.requirements[miscName].isCompleted()) continue
+        if (getExpense() + misc.getExpense() <= income) {
+            gameData.currentMisc.push(misc)
+        }
+    }
+}
+
 function yearsToDays(years) {
     var days = years * 365
     return days
@@ -1318,6 +1375,7 @@ function update() {
     increaseDays()
     autoPromote()
     autoLearn()
+    autoPurchase()
     doCurrentTask(gameData.currentJob)
     doCurrentTask(gameData.currentSkill)
     applyExpenses()
