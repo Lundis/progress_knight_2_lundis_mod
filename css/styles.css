@@ -18,9 +18,9 @@ td {
 
 .progress-text {
     position: absolute;
-    top: 0px;
-    bottom: 0px;
-    padding: 5px;
+    top: 0;
+    bottom: 0;
+    padding: 0;
     color: white
 }
 
@@ -32,7 +32,7 @@ td {
 }
 
 .progress-fill {
-    height: 30px;
+    height: 20px;
     background-color: rgb(46, 148, 231)
 }
 
@@ -182,3 +182,14 @@ button:focus {
     display: flex;
     flex-direction: column;
 }
+
+th {
+    font-size: small;
+}
+
+td {
+    font-size: small;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
