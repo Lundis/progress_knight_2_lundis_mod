@@ -36,7 +36,7 @@ const updateSpeed = 20
 
 const baseLifespan = 365 * 70
 
-const baseGameSpeed = 4*16
+const baseGameSpeed = 4
 
 const permanentUnlocks = ["Scheduling", "Shop", "Automation"]
 
@@ -570,7 +570,7 @@ function getGameSpeed() {
 	var temporalDimension = gameData.taskData["Temporal Dimension"]
 	var timeLoop = gameData.taskData["Time Loop"]
     var timeWarpingSpeed = gameData.timeWarpingEnabled ? timeWarping.getEffect() + temporalDimension.getEffect() * timeLoop.getEffect() : 1
-    var gameSpeed = baseGameSpeed * +!gameData.paused * +isAlive() * timeWarpingSpeed
+    var gameSpeed = baseGameSpeed * +!gameData.paused * +isAlive() * timeWarpingSpeed * (10+getBaseLog(3, gameData.days/365))
     return gameSpeed
 }
 
