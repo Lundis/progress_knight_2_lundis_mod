@@ -114,6 +114,7 @@ button:focus {
 
 .sidebar-element {
     margin-bottom: 16px;
+    font-size: small;
 }
 
 .slidecontainer {

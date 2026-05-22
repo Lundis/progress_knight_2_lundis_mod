@@ -38,7 +38,7 @@ const baseLifespan = 365 * 70
 
 const baseGameSpeed = 4*16
 
-const permanentUnlocks = ["Scheduling", "Shop", "Automation", "Quick task display"]
+const permanentUnlocks = ["Scheduling", "Shop", "Automation"]
 
 const jobBaseData = {
     "Beggar": {name: "Beggar", maxXp: 50, income: 5},
@@ -769,13 +769,6 @@ function createAllRows(categoryType, tableId) {
     }
 }
 
-function updateQuickTaskDisplay(taskType) {
-    var currentTask = taskType == "job" ? gameData.currentJob : gameData.currentSkill
-    var quickTaskDisplayElement = document.getElementById("quickTaskDisplay")
-    var progressBar = quickTaskDisplayElement.getElementsByClassName(taskType)[0]
-    progressBar.getElementsByClassName("name")[0].textContent = currentTask.name + " lvl " + currentTask.level
-    progressBar.getElementsByClassName("progressFill")[0].style.width = currentTask.xp / currentTask.getMaxXp() * 100 + "%"
-}
 
 function updateRequiredRows(data, categoryType) {
     var requiredRows = document.getElementsByClassName("requiredRow")
@@ -1387,8 +1380,6 @@ function updateUI() {
     updateRequiredRows(gameData.itemData, itemCategories)
     updateHeaderRows(jobCategories)
     updateHeaderRows(skillCategories)
-    updateQuickTaskDisplay("job")
-    updateQuickTaskDisplay("skill")
     hideEntities()
     updateText()  
 }
@@ -1557,7 +1548,6 @@ gameData.requirements = {
     "Time warping info": new TaskRequirement([document.getElementById("timeWarping")], [{task: "Adept Mage", requirement: 10}]),
 
     "Automation": new AgeRequirement([document.getElementById("automation")], [{requirement: 20}]),
-    "Quick task display": new AgeRequirement([document.getElementById("quickTaskDisplay")], [{requirement: 20}]),
 
     //Common work
     "Beggar": new TaskRequirement([getTaskElement("Beggar")], []),
