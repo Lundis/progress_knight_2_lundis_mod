@@ -159,6 +159,12 @@ button:focus {
     display: inline-block;
 }
 
+.income {
+    max-width: 100px;
+    max-height: 16px;
+    overflow: hidden;
+}
+
 .panel {
     background-color: white;
 }
