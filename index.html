@@ -12,7 +12,7 @@
 <body id="body" class="dark">
     <div class="w3-margin">
         <div class="row">
-                <div id="info" class="panel w3-padding" style="width: 300px; top: 0;">
+                <div id="info" class="panel w3-padding" style="width: 260px; top: 0;">
                     <span id="deathText">
                         <div style="font-size: large; color: red">Age has caught up to you</div>
                         <div class="sidebar-element" style="color: gray">Your age has met your lifespan, use the amulet to rebirth before you pass away</div>
@@ -20,9 +20,7 @@
                     
                     <div class="" style="font-size: large">Age <span id="ageDisplay">14</span> Day <span id="dayDisplay">0</span></div>
                     <div class="sidebar-element" style="color: gray">Lifespan: <span id="lifespanDisplay">70</span> years</div>
-                    
-                    <button id="pauseButton" class="w3-button button sidebar-element" onClick="setPause()">Pause</button>
-    
+
                     <span id="automation" class="inline" style="margin-left: 8px">
                         <span>
                             <div class="inline">Auto-promote</div>
@@ -38,6 +36,8 @@
                             <div class="inline">Auto-purchase</div>
                             <input type="checkbox" class="inline" id="autoPurchase" checked>
                         </span>
+                        </br>
+                        <button id="pauseButton" class="w3-button button sidebar-element" onClick="setPause()">Pause</button>
                     </span>
     
                     <div style="font-size: large" id="coinDisplay">
@@ -115,8 +115,6 @@
     
                     <span id="timeWarping">
                         <div style="font-size: large"><span style="color: rgb(204, 34, 219)">Time Warping: </span><span id="timeWarpingDisplay"></span></div>
-                        <div style="color: gray">Affects game speed</div>
-                        <div style="color: red">Abilities can increase its multiplier</div>
                         <button id="timeWarpingButton" class="w3-button button sidebar-element" style="margin-top: 5px; width:150px" onClick="setTimeWarping()">Enable warp</button>
                     </span>
                 </div>
