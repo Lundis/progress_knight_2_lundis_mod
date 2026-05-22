@@ -48,11 +48,11 @@ td {
     display: none !important;
 }
 
-#jobTable, #skillTable, #itemTable {
+#jobTable, #skillTable, #propertyTable, #miscTable {
     width: auto;
 }
 
-#jobs {
+#jobs, #shop {
     display: flex;
     gap: 16px;
     align-items: flex-start;

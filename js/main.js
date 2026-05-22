@@ -746,22 +746,23 @@ function createRow(templates, name, categoryName, categoryType) {
     return row
 }
 
-function createAllRows(categoryType, tableId) {
+function createAllRows(categoryType, tableId, templateCategory) {
+    if (templateCategory === undefined) templateCategory = categoryType
     var templates = {
-        headerRow: document.getElementsByClassName(categoryType == itemCategories ? "headerRowItemTemplate" : "headerRowTaskTemplate")[0],
-        row: document.getElementsByClassName(categoryType == itemCategories ? "rowItemTemplate" : "rowTaskTemplate")[0],
+        headerRow: document.getElementsByClassName(templateCategory == itemCategories ? "headerRowItemTemplate" : "headerRowTaskTemplate")[0],
+        row: document.getElementsByClassName(templateCategory == itemCategories ? "rowItemTemplate" : "rowTaskTemplate")[0],
     }
 
     var table = document.getElementById(tableId)
 
     for (categoryName in categoryType) {
-        var headerRow = createHeaderRow(templates, categoryType, categoryName)
+        var headerRow = createHeaderRow(templates, templateCategory, categoryName)
         table.appendChild(headerRow)
-        
+
         var category = categoryType[categoryName]
         category.forEach(function(name) {
-            var row = createRow(templates, name, categoryName, categoryType)
-            table.appendChild(row)       
+            var row = createRow(templates, name, categoryName, templateCategory)
+            table.appendChild(row)
         })
 
         var requiredRow = createRequiredRow(categoryName)
@@ -1514,7 +1515,8 @@ window.addEventListener('keydown', function(e) {
 
 createAllRows(jobCategories, "jobTable")
 createAllRows(skillCategories, "skillTable")
-createAllRows(itemCategories, "itemTable") 
+createAllRows({"Properties": itemCategories["Properties"]}, "propertyTable", itemCategories)
+createAllRows({"Misc": itemCategories["Misc"]}, "miscTable", itemCategories)
 
 createData(gameData.taskData, jobBaseData)
 createData(gameData.taskData, skillBaseData)
