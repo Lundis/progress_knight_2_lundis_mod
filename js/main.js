@@ -1358,28 +1358,16 @@ window.addEventListener('keyup', function(e) {
     if(e.key=="d" || e.key=="D") isSuperSpeed = false
 });
 
-(function() {
-    let span = document.createElement('span');
-    let div = document.createElement('div');
-    div.classList.add('inline');
-    div.textContent = 'Auto-pause(Void)';
-    let checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.classList.add('inline');
-    checkbox.id = 'autoPause';
-    span.append(checkbox);
-    span.append(div);
-    document.querySelector('span#automation').prepend(document.createElement('br'));
-    document.querySelector('span#automation').prepend(span);
-    increaseDays = () => {
-        var increase = applySpeed(1)
-        var autoPause = document.getElementById("autoPause").checked;
-        if (gameData.days < 365000 && gameData.days + increase > 365000 && autoPause){
-            gameData.paused = true;
-        }
-        gameData.days += increase
+increaseDays = () => {
+    var increase = applySpeed(1)
+    if (gameData.days < 365000 && gameData.days + increase > 365000 && document.getElementById("autoPause").checked) {
+        gameData.paused = true;
     }
-})()
+    if (gameData.days < 3650000 && gameData.days + increase > 3650000 && document.getElementById("autoPauseCosmic").checked) {
+        gameData.paused = true;
+    }
+    gameData.days += increase
+}
 
 
 
@@ -1422,6 +1410,8 @@ gameData.requirements = {
     "Time warping info": new TaskRequirement([document.getElementById("timeWarping")], [{task: "Adept Mage", requirement: 10}]),
 
     "Automation": new AgeRequirement([document.getElementById("automation")], [{requirement: 20}]),
+    "autoPauseVoid": new AgeRequirement([document.getElementById("autoPauseVoidSpan")], [{requirement: 1000}]),
+    "autoPauseCosmic": new AgeRequirement([document.getElementById("autoPauseCosmicSpan")], [{requirement: 10000}]),
 
     //Common work
     "Beggar": new TaskRequirement([getTaskElement("Beggar")], []),
