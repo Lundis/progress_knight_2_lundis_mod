@@ -950,7 +950,7 @@ function getKeyOfLowestValueFromDict(dict) {
 
 function autoLearn() {
     if (!autoLearnElement.checked || !skillWithLowestMaxXp) return
-    if (Date.now() - lastManualSkillSet < 3000) return
+    if (Date.now() - lastManualSkillSet < 1000) return
     gameData.currentSkill = skillWithLowestMaxXp
 }
 
