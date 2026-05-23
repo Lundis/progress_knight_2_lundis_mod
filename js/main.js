@@ -690,11 +690,11 @@ function updateRequiredRows(data, categoryType) {
                     for (requirement of requirements) {
                         var task = gameData.taskData[requirement.task]
                         if (task.level >= requirement.requirement) continue
-                        var text = " " + requirement.task + " level " + format(task.level) + "/" + format(requirement.requirement) + ","
+                        var text = " " + requirement.task + " level " + format(task.level) + "/" + format(requirement.requirement) + "<br />"
                         finalText += text
                     }
                     finalText = finalText.substring(0, finalText.length - 1)
-                    levelElement.textContent = finalText
+                    levelElement.innerHTML = finalText
                 }
             } 
 		        else if (data == gameData.itemData) {
