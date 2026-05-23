@@ -28,6 +28,7 @@ var tempData = {}
 var skillWithLowestMaxXp = null
 var lastManualSkillSet = 0
 var isFastForward = false
+var isSuperSpeed = false
 
 const autoPromoteElement = document.getElementById("autoPromote")
 const autoLearnElement = document.getElementById("autoLearn")
@@ -432,7 +433,7 @@ function getGameSpeed() {
 	var temporalDimension = gameData.taskData["Temporal Dimension"]
 	var timeLoop = gameData.taskData["Time Loop"]
     var timeWarpingSpeed = gameData.timeWarpingEnabled ? timeWarping.getEffect() + temporalDimension.getEffect() * timeLoop.getEffect() : 1
-    var gameSpeed = baseGameSpeed * +!gameData.paused * +isAlive() * timeWarpingSpeed * (10+getBaseLog(3, gameData.days/365)) * (isFastForward ? 10 : 1)
+    var gameSpeed = baseGameSpeed * +!gameData.paused * +isAlive() * timeWarpingSpeed * (10+getBaseLog(3, gameData.days/365)) * (isSuperSpeed ? 1000 : isFastForward ? 10 : 1)
     return gameSpeed
 }
 
@@ -1346,10 +1347,12 @@ window.addEventListener('keydown', function(e) {
     if(e.key=="l" || e.key=="L") document.getElementById("autoLearn").checked = !document.getElementById("autoLearn").checked
     if(e.key=="p" || e.key=="P") document.getElementById("autoPromote").checked = !document.getElementById("autoPromote").checked
     if(e.key=="s" || e.key=="S") isFastForward = true
+    if(e.key=="d" || e.key=="D") isSuperSpeed = true
 });
 
 window.addEventListener('keyup', function(e) {
     if(e.key=="s" || e.key=="S") isFastForward = false
+    if(e.key=="d" || e.key=="D") isSuperSpeed = false
 });
 
 (function() {
