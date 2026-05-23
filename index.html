@@ -113,11 +113,16 @@
                         <div style="font-size: large"><span style="color: rgb(204, 34, 219)">Time Warping: </span><span id="timeWarpingDisplay"></span></div>
                         <button id="timeWarpingButton" class="w3-button button sidebar-element" style="margin-top: 5px; width:150px" onClick="setTimeWarping()">Enable warp</button>
                     </span>
-                    <span id="rebirthOneButton">
-                        <button class="w3-button button sidebar-element" onClick="rebirthOne()">Touch the eye</button>
+                    <span id="rebirthOneButton" style="display: block; margin-bottom: 8px;">
+                        <button class="w3-button button" onClick="rebirthOne()">Touch the eye</button>
                     </span>
-                    <span id="rebirthTwoButton">
-                        <button class="w3-button button sidebar-element" onClick="rebirthTwo()">Embrace evil</button>
+                    <span id="rebirthTwoButton" style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                        <button class="w3-button button" onClick="rebirthTwo()">Embrace evil</button>
+                        <span style="color: rgb(200, 0, 0); font-size: small">+<span id="sidebarEvilGain"></span> evil</span>
+                    </span>
+                    <span id="rebirthThreeButton" style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                        <button class="w3-button button" onClick="rebirthThree()">Transcend</button>
+                        <span style="color: rgb(24, 210, 217); font-size: small">+<span id="sidebarEssenceGain"></span> essence</span>
                     </span>
                 </div>
                 <div class="column">
@@ -304,12 +309,6 @@
                                          </br>
                                     </i>
                                 </li>
-                                <div style="margin: 8px;" id="rebirthNote6">
-                                    <div style="margin-bottom: 8px;">
-                                    <button class="w3-button button" style="margin-bottom: 8px; margin-top: 8px" onClick="rebirthThree()">Transcend</button>
-                                    </br>
-                                    </div>
-                                </div>
                             </ul>
                         </div>
         

@@ -782,13 +782,16 @@ function updateText() {
     formatCoins(getIncome(), document.getElementById("incomeDisplay"))
     formatCoins(getExpense(), document.getElementById("expenseDisplay"))
 
-    document.getElementById("happinessDisplay").textContent = getHappiness().toFixed(1)
+    document.getElementById("happinessDisplay").textContent = format(getHappiness())
 
-    document.getElementById("evilDisplay").textContent = gameData.evil.toFixed(1)
-    document.getElementById("evilGainDisplay").textContent = getEvilGain().toFixed(1)
-	
-	document.getElementById("essenceDisplay").textContent = gameData.essence.toFixed(1)
-	document.getElementById("essenceGainDisplay").textContent = getEssenceGain().toFixed(1)
+    document.getElementById("evilDisplay").textContent = format(gameData.evil)
+    document.getElementById("evilGainDisplay").textContent = format(Math.round(getEvilGain() * 100) / 100)
+
+	document.getElementById("essenceDisplay").textContent = format(gameData.essence)
+	document.getElementById("essenceGainDisplay").textContent = format(Math.round(getEssenceGain() * 100) / 100)
+
+    document.getElementById("sidebarEvilGain").textContent = format(Math.round(getEvilGain() * 100) / 100)
+    document.getElementById("sidebarEssenceGain").textContent = format(Math.round(getEssenceGain() * 100) / 100)
 
     document.getElementById("timeWarpingDisplay").textContent = "x" + (gameData.taskData["Time Warping"].getEffect() * gameData.taskData["Temporal Dimension"].getEffect() * gameData.taskData["Time Loop"].getEffect()).toFixed(1)
     document.getElementById("timeWarpingButton").textContent = gameData.timeWarpingEnabled ? "Disable warp" : "Enable warp"
@@ -1404,7 +1407,7 @@ gameData.requirements = {
 	"Rebirth note 4": new AgeRequirement([document.getElementById("rebirthNote4")], [{requirement: 1000}]),
 	"Rebirth note 4": new AgeRequirement([document.getElementById("rebirthNote4")], [{requirement: 1000}]),
 	"Rebirth note 5": new AgeRequirement([document.getElementById("rebirthNote5")], [{requirement: 10000}]),
-	"Rebirth note 6": new TaskRequirement([document.getElementById("rebirthNote6")], [{task: "Cosmic Recollection", requirement: 1}]),
+	"Rebirth note 6": new TaskRequirement([document.getElementById("rebirthThreeButton")], [{task: "Cosmic Recollection", requirement: 1}]),
     "Evil info": new EvilRequirement([document.getElementById("evilInfo")], [{requirement: 1}]),
 	"Essence info": new EssenceRequirement([document.getElementById("essenceInfo")], [{requirement: 1}]),
     "Time warping info": new TaskRequirement([document.getElementById("timeWarping")], [{task: "Adept Mage", requirement: 10}]),
